@@ -3,6 +3,7 @@ package models;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class BoardTest {
@@ -11,9 +12,15 @@ public class BoardTest {
 
 	}
 
+	private Board board;
+	
+	@Before
+	public void before(){
+		board = new Board();
+	}
+
 	@Test
 	public void whenCreatingNewBoard_shouldBeCompletelyEmpty() {
-		Board board = new Board();
 		for (int i = 0; i < board.size(); i++) {
 			for (int j = 0; j < board.size() - 1; j++) {
 				assertNull(board.getPiece(new Coordinate(i, j)));
@@ -23,7 +30,6 @@ public class BoardTest {
 
 	@Test
 	public void whenBoardIsPopulated_everyPieceShouldBeCorrectlyPositioned() {
-		Board board = new Board();
 		board.populateBoard();
 		assertEquals(Color.WHITE, board.getPiece(new Coordinate(8, 1)).getColor());
 		board.removePiece(new Coordinate(8, 1));
@@ -82,7 +88,6 @@ public class BoardTest {
 
 	@Test
 	public void whenPlayerWhiteHasNoPieces_blackIsWinner() {
-		Board board = new Board();
 		board.populateBoard();
 		board.removePiece(new Coordinate(8, 1));
 		board.removePiece(new Coordinate(8, 3));
@@ -101,7 +106,6 @@ public class BoardTest {
 
 	@Test
 	public void whenPlayerWhiteCantMove_blackIsWinner() {
-		Board board = new Board();
 		board.populateBoard();
 		board.removePiece(new Coordinate(8, 1));
 		board.removePiece(new Coordinate(8, 3));
@@ -121,7 +125,6 @@ public class BoardTest {
 
 	@Test
 	public void whenClearingBoard_shouldHaveNoPieces() {
-		Board board = new Board();
 		board.clear();
 		for (int i = 0; i < board.size() - 1; i++) {
 			for (int j = 0; j < board.size() - 1; j++) {

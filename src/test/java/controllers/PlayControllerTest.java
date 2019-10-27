@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import models.Color;
@@ -32,9 +33,15 @@ public class PlayControllerTest {
 	 12345678
      * */
 	
+	private Game game;
+	
+	@Before
+	public void before(){
+		game = new Game();
+	}
+	
 	@Test
 	public void whenMovingCorrectly_shouldNotThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(6, 1);
 		Coordinate target = new Coordinate(5, 2);
 		PlayController playController = new PlayController(game);
@@ -47,7 +54,6 @@ public class PlayControllerTest {
 
 	@Test
 	public void whenMovingToOccupiedPlace_shouldThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(1, 2);
 		Coordinate target = new Coordinate(2, 1);
 		PlayController playController = new PlayController(game);
@@ -58,7 +64,6 @@ public class PlayControllerTest {
 
 	@Test
 	public void whenNotMovingDiagonally_shouldThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(1, 2);
 		Coordinate target = new Coordinate(2, 2);
 		PlayController playController = new PlayController(game);
@@ -69,7 +74,6 @@ public class PlayControllerTest {
 
 	@Test
 	public void whenNotMovingForward_shouldThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(6, 1);
 		Coordinate target = new Coordinate(5, 2);
 		PlayController playController = new PlayController(game);
@@ -81,7 +85,6 @@ public class PlayControllerTest {
 
 	@Test
 	public void whenThereIsNoPieceInOrigin_shouldThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(1, 1);
 		Coordinate target = new Coordinate(2, 2);
 		PlayController playController = new PlayController(game);
@@ -91,7 +94,6 @@ public class PlayControllerTest {
 
 	@Test
 	public void whenMovingTooFarAway_shouldThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(3, 2);
 		Coordinate target = new Coordinate(5, 4);
 		PlayController playController = new PlayController(game);
@@ -102,7 +104,6 @@ public class PlayControllerTest {
 
 	@Test
 	public void whenGettingMoreThanOneOpponentPieceInOneMovement_shouldThrowError() {
-		Game game = new Game();
 		Coordinate origin = new Coordinate(5, 4);
 		Coordinate target = new Coordinate(2, 1);
 		PlayController playController = new PlayController(game);
