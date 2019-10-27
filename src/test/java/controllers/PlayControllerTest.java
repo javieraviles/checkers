@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import models.Color;
 import models.Coordinate;
+import models.Error;
 import models.Game;
 import models.Piece;
 import models.State;
@@ -53,7 +54,7 @@ public class PlayControllerTest {
 	public void whenMovingToOccupiedPlace_shouldThrowError() {
 		Coordinate origin = new Coordinate(1, 2);
 		Coordinate target = new Coordinate(2, 1);
-		assertEquals("Error! target not empty", playController.move(origin, target));
+		assertEquals(Error.TARGET_NOT_EMPTY, playController.move(origin, target));
 		assertNotNull(playController.getPiece(origin));
 		assertNotNull(playController.getPiece(target));
 	}
@@ -62,7 +63,7 @@ public class PlayControllerTest {
 	public void whenNotMovingDiagonally_shouldThrowError() {
 		Coordinate origin = new Coordinate(1, 2);
 		Coordinate target = new Coordinate(2, 2);
-		assertEquals("Error! Not moving diagonally", playController.move(origin, target));
+		assertEquals(Error.NOT_MOVING_DIAGONALLY, playController.move(origin, target));
 		assertNotNull(playController.getPiece(origin));
 		assertNull(playController.getPiece(target));
 	}
@@ -72,7 +73,7 @@ public class PlayControllerTest {
 		Coordinate origin = new Coordinate(6, 1);
 		Coordinate target = new Coordinate(5, 2);
 		playController.move(origin, target);
-		assertEquals("Error! Not moving forward", playController.move(target, origin));
+		assertEquals(Error.NOT_MOVING_FORWARD, playController.move(target, origin));
 		assertNotNull(playController.getPiece(target));
 		assertNull(playController.getPiece(origin));
 	}
@@ -81,7 +82,7 @@ public class PlayControllerTest {
 	public void whenThereIsNoPieceInOrigin_shouldThrowError() {
 		Coordinate origin = new Coordinate(1, 1);
 		Coordinate target = new Coordinate(2, 2);
-		assertEquals("Error! No piece to move", playController.move(origin, target));
+		assertEquals(Error.NO_PIECE_TO_MOVE, playController.move(origin, target));
 		assertNull(playController.getPiece(origin));
 	}
 
@@ -89,7 +90,7 @@ public class PlayControllerTest {
 	public void whenMovingTooFarAway_shouldThrowError() {
 		Coordinate origin = new Coordinate(3, 2);
 		Coordinate target = new Coordinate(5, 4);
-		assertEquals("Error! respect the distance", playController.move(origin, target));
+		assertEquals(Error.RESPECT_DISTANCE, playController.move(origin, target));
 		assertNotNull(playController.getPiece(origin));
 		assertNull(playController.getPiece(target));
 	}
@@ -100,7 +101,7 @@ public class PlayControllerTest {
 		Coordinate target = new Coordinate(3, 2);
 		playController.move(new Coordinate(3, 2), new Coordinate(4, 3));
 		playController.move(new Coordinate(6, 3), new Coordinate(5, 4));
-		assertEquals("Error! not getting any opponent pieces", playController.move(origin, target));
+		assertEquals(Error.NOT_GETTING_PIECES, playController.move(origin, target));
 		assertNotNull(playController.getPiece(origin));
 		assertNull(playController.getPiece(target));
 	}
@@ -120,7 +121,7 @@ public class PlayControllerTest {
 		playController.move(new Coordinate(1, 4), new Coordinate(2, 3));
 		playController.move(new Coordinate(2, 7), new Coordinate(3, 6));
 		playController.move(new Coordinate(5, 6), new Coordinate(4, 7));
-		assertEquals("Error! can't get that many pieces in one jump",
+		assertEquals(Error.CANT_GET_MANY_PIECES_IN_ONE_JUMP,
 				playController.move(new Coordinate(4, 7), new Coordinate(1, 4)));
 	}
 
