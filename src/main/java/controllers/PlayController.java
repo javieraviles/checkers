@@ -1,23 +1,20 @@
 package controllers;
 
-import models.Game;
 import models.Coordinate;
+import models.Game;
 import models.Piece;
+import models.State;
 
-class PlayController{
+class PlayController {
 
-    public PlayController(Game game) {
+	public PlayController(Game game, State state) {
 	}
 
-	public Error move(Coordinate origin, Coordinate target){
-        return null;
-    }
-
-	public Piece getPiece(Coordinate coordintae) {
+	public Error move(Coordinate origin, Coordinate target) {
 		return null;
 	}
 
-	public void removePiece(Coordinate coordinate) {
-		
+	public Piece getPiece(Coordinate coordintae) {
+		return null;
 	}
 }

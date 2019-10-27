@@ -12,6 +12,7 @@ import models.Color;
 import models.Coordinate;
 import models.Game;
 import models.Piece;
+import models.State;
 
 public class PlayControllerTest {
 
@@ -26,13 +27,15 @@ public class PlayControllerTest {
 	 * b b 8 12345678
 	 */
 
+	private State state;
 	private Game game;
 	private PlayController playController;
 
 	@Before
 	public void before() {
 		game = new Game();
-		playController = new PlayController(game);
+		state = new State();
+		playController = new PlayController(game, state);
 	}
 
 	@Test
@@ -92,19 +95,6 @@ public class PlayControllerTest {
 	}
 
 	@Test
-	public void whenKingGettingMoreThanOnePieceInOneMovement_shouldThrowError() {
-		Coordinate origin = new Coordinate(5, 4);
-		Coordinate target = new Coordinate(2, 1);
-		playController.move(new Coordinate(3, 2), new Coordinate(4, 3));
-		playController.move(new Coordinate(2, 1), new Coordinate(3, 2));
-		playController.move(new Coordinate(6, 3), new Coordinate(5, 4));
-		playController.getPiece(origin).makeKing();
-		assertEquals("Error! can't get that many pieces in one jump", playController.move(origin, target));
-		assertNotNull(playController.getPiece(origin));
-		assertNull(playController.getPiece(target));
-	}
-
-	@Test
 	public void whenMovingLikeGettingOpponentPieceWithNoPiece_shouldThrowError() {
 		Coordinate origin = new Coordinate(5, 4);
 		Coordinate target = new Coordinate(3, 2);
@@ -116,8 +106,10 @@ public class PlayControllerTest {
 	}
 
 	@Test
-	public void whenPieceGettingEndOfBoard_shouldBeConvertedIntoKingAndWillBeAbleToMoveBackwardsAndLongDistances() {
-		playController.removePiece(new Coordinate(1, 2));
+	public void whenPieceGettingEndOfBoard_shouldBeConvertedIntoKingAndWillBeAbleToMoveBackwardsAndLongDistancesButNeverGetMultiplePiecesInOneMovement() {
+		playController.move(new Coordinate(3, 2), new Coordinate(4, 2));
+		playController.move(new Coordinate(2, 1), new Coordinate(3, 2));
+		playController.move(new Coordinate(1, 2), new Coordinate(2, 1));
 		playController.move(new Coordinate(3, 4), new Coordinate(4, 3));
 		playController.move(new Coordinate(6, 1), new Coordinate(5, 2));
 		playController.move(new Coordinate(5, 2), new Coordinate(1, 2));
@@ -125,6 +117,11 @@ public class PlayControllerTest {
 		playController.move(new Coordinate(3, 6), new Coordinate(4, 5));
 		playController.move(new Coordinate(1, 2), new Coordinate(5, 6));
 		assertTrue(playController.getPiece(new Coordinate(5, 6)).isKing());
+		playController.move(new Coordinate(1, 4), new Coordinate(2, 3));
+		playController.move(new Coordinate(2, 7), new Coordinate(3, 6));
+		playController.move(new Coordinate(5, 6), new Coordinate(4, 7));
+		assertEquals("Error! can't get that many pieces in one jump",
+				playController.move(new Coordinate(4, 7), new Coordinate(1, 4)));
 	}
 
 }
