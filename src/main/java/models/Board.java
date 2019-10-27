@@ -18,7 +18,7 @@ public class Board {
 		return BOARD_SIZE;
 	}
 
-	public Color isThereWinner() {
+	public Color isWinner() {
 		return null;
 	}
 

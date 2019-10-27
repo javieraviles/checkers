@@ -101,7 +101,7 @@ public class BoardTest {
 		board.removePiece(new Coordinate(6, 3));
 		board.removePiece(new Coordinate(6, 5));
 		board.removePiece(new Coordinate(6, 7));
-		assertEquals(Color.BLACK, board.isThereWinner());
+		assertEquals(Color.BLACK, board.isWinner());
 	}
 
 	@Test
@@ -120,7 +120,7 @@ public class BoardTest {
 		board.removePiece(new Coordinate(6, 5));
 		board.movePiece(new Coordinate(6, 7), new Coordinate(5, 8));
 		board.movePiece(new Coordinate(5, 8), new Coordinate(4, 7));
-		assertEquals(Color.BLACK, board.isThereWinner());
+		assertEquals(Color.BLACK, board.isWinner());
 	}
 
 	@Test

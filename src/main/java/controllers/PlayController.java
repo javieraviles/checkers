@@ -16,4 +16,8 @@ class PlayController{
 	public Piece getPiece(Coordinate coordintae) {
 		return null;
 	}
+
+	public void removePiece(Coordinate coordinate) {
+		
+	}
 }
