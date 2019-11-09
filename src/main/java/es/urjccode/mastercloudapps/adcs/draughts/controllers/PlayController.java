@@ -14,9 +14,12 @@ public class PlayController extends Controller {
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
-		Error error = this.game.move(origin, target);
-		if (this.game.isBlocked()) {
-			this.state.next();
+		Error error = this.game.isValidMove(origin, target);
+		if (error == null) {
+			this.game.move(origin, target);
+			if (this.isBlocked()) {
+				this.state.next();
+			}
 		}
 		return error;
 	}
