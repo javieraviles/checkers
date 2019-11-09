@@ -50,7 +50,7 @@ class Board {
 	}
 
 	List<Piece> getPieces(Color color) {
-		List<Piece> pieces = new ArrayList<Piece>();
+		List<Piece> pieces = new ArrayList<>();
 		for (int i = 0; i < this.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
 				Piece piece = this.getPiece(new Coordinate(i, j));
@@ -79,7 +79,7 @@ class Board {
 
 	private String toStringHorizontalNumbers() {
 		StringBuilder builder = new StringBuilder(" ");
-		for (int j = 0; j < Board.DIMENSION; j++) {
+		for (int j = 0; j < this.getDimension(); j++) {
 			builder.append(j);
 		}
 		return builder.append("\n").toString();

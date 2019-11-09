@@ -1,5 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import java.util.List;
+
 public class Game {
 
 	private Board board;
@@ -86,11 +88,15 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return this.board.getPieces(this.turn.getColor()).isEmpty();
+		return this.getPieces(this.turn.getColor()).isEmpty();
 	}
 
 	public int getDimension() {
 		return this.board.getDimension();
+	}
+
+	public List<Piece> getPieces(Color color) {
+		return this.board.getPieces(color);
 	}
 
 }
