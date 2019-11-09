@@ -1,23 +1,18 @@
 package es.urjccode.mastercloudapps.adcs.draughts.views;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.StartController;
-import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 
-class StartView {
+public class StartView extends SubView {
 
-	Console console;
+    private static final String TITTLE = "Draughts";
 
-	private String INITIAL_MESSAGE = "Las Damas!!!";
+    public StartView(){
+        super();
+    }
 
-	public StartView() {
-		this.console = new Console();
-	}
-
-	void interact(StartController startController) {
-		startController.play();
-		this.console.writeln(INITIAL_MESSAGE);
-		this.console.writeln();
-		this.console.writeln(startController.getStringBoardGame());
-	}
-
+    public void interact(StartController startController) {
+        this.console.writeln(StartView.TITTLE);
+        new GameView().write(startController);
+        startController.start();
+    }
 }

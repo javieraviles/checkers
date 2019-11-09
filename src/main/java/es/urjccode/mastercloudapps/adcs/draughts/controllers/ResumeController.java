@@ -1,25 +1,24 @@
 package es.urjccode.mastercloudapps.adcs.draughts.controllers;
 
-import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
-import es.urjccode.mastercloudapps.adcs.draughts.models.State;
+import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
 
-public class ResumeController extends AcceptController {
+public class ResumeController extends Controller {
 
-	public ResumeController(Game game, State state) {
-		super(game, state);
-	}
-
-	public void resume(boolean newGame) {
-		if (newGame) {
-			this.game.clear();
-			this.state.reset();
-		} else {
-			this.nextState();
-		}
-	}
-
-	@Override
+	public ResumeController(Session session) {
+        super(session);
+    }
+    
+    @Override
 	public void accept(ControllersVisitor controllersVisitor) {
 		controllersVisitor.visit(this);
 	}
+
+	public void next() {
+        this.session.next();
+	}
+
+	public void reset() {
+        this.session.reset();
+	}
+
 }

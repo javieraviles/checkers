@@ -1,6 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.views;
 
-import static org.mockito.Mockito.times;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -13,38 +13,30 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.ResumeController;
-import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
+import es.urjccode.mastercloudapps.adcs.draughts.utils.YesNoDialog;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResumeViewTest {
 
-	@InjectMocks
-	ResumeView resumeView;
+    @Mock
+    ResumeController resumeController;
 
-	@Mock
-	ResumeController resumeController;
+    @Mock
+    YesNoDialog yesNoDialog;
 
-	@Mock
-	Console console;
+    @InjectMocks
+    ResumeView resumeView;
 
-	@Before
-	public void initMocks() {
-		MockitoAnnotations.initMocks(this);
-	}
-
-	@Test
-	public void whenAskingToPlayAgainAnsweringInvalidCharacterAndYes_shouldRestartGameCorrectlyAndPrintConsoleMessage() {
-		when(console.readChar("¿Queréis jugar otra? (s/n): ")).thenReturn('p').thenReturn('s');
-		resumeView.interact(resumeController);
-		verify(console, times(1)).writeln("El valor tiene que ser 's' o 'n'");
-		verify(resumeController, times(1)).resume(true);
-	}
-
-	@Test
-	public void whenAskingToPlayAgainAndAnsweringNo_shouldGoNextStateCorrectly() {
-		when(console.readChar("¿Queréis jugar otra? (s/n): ")).thenReturn('n');
-		resumeView.interact(resumeController);
-		verify(resumeController, times(1)).resume(false);
-	}
+    @Before
+    public void initMocks() {
+        MockitoAnnotations.initMocks(this);
+    }
+    
+    @Test
+    public void testInteract(){
+        when(yesNoDialog.read(anyString())).thenReturn(true);
+        resumeView.interact(resumeController);
+        verify(resumeController).reset();
+    }
 
 }

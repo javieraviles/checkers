@@ -2,13 +2,14 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 public class State {
 
-	private StateValue stateValue;
+    private StateValue stateValue;
 
 	public State() {
-		this.stateValue = StateValue.INITIAL;
+		this.reset();
 	}
 
 	public void next() {
+        assert this.stateValue != StateValue.EXIT;
 		this.stateValue = StateValue.values()[this.stateValue.ordinal() + 1];
 	}
 
@@ -16,11 +17,7 @@ public class State {
 		this.stateValue = StateValue.INITIAL;
 	}
 
-	public StateValue getStateValue() {
+	public StateValue getValueState() {
 		return this.stateValue;
-	}
-
-	public void setStateValue(StateValue stateValue) {
-		this.stateValue = stateValue;
 	}
 }
