@@ -38,9 +38,9 @@ public class Game {
 		this.board.move(origin, target);
 		this.turn.change();
 	}
-	
-	public Error isValidMove(Coordinate origin, Coordinate target){
-		return this.board.isValidMovement(origin, target, this.turn.getColor());
+
+	public Error isValidMove(Coordinate origin, Coordinate target) {
+		return this.board.isValidMovement(origin, target, this.getColor());
 	}
 
 	public Color getColor(Coordinate coordinate) {
@@ -61,7 +61,7 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return this.getPieces(this.turn.getColor()).isEmpty();
+		return this.getPieces(this.getColor()).isEmpty();
 	}
 
 	public int getDimension() {
