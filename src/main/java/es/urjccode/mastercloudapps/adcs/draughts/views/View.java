@@ -10,13 +10,13 @@ public class View implements ControllersVisitor {
 
     private StartView startView;
 
-    private CommandView commandView;
+    private PlayView commandView;
 
     private ResumeView resumeView;
 
     public View(){
         this.startView = new StartView();
-        this.commandView = new CommandView();
+        this.commandView = new PlayView();
         this.resumeView = new ResumeView();
     }
 

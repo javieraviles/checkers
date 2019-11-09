@@ -26,7 +26,7 @@ public class CommandViewTest {
     Console console;
 
     @InjectMocks
-    CommandView commandView;
+    PlayView commandView;
 
     @Before
     public void initMocks() {
