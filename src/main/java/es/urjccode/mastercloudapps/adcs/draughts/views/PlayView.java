@@ -4,7 +4,7 @@ import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
 
-public class PlayView extends SubView {
+public class PlayView extends WithConsoleView {
 
 	public PlayView() {
 		super();
