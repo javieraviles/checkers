@@ -5,21 +5,19 @@ import es.urjccode.mastercloudapps.adcs.draughts.utils.YesNoDialog;
 
 public class ResumeView extends SubView {
 
-    private static final String MESSAGE = "¿Queréis jugar otra";
-    
-    private YesNoDialog yesNoDialog;
+	private YesNoDialog yesNoDialog;
 
-    public ResumeView(){
-        super();
-        this.yesNoDialog = new YesNoDialog();
-    }
+	public ResumeView() {
+		super();
+		this.yesNoDialog = new YesNoDialog();
+	}
 
-    void interact(ResumeController resumeController) {
-        if (this.yesNoDialog.read(ResumeView.MESSAGE)){
-            resumeController.reset();
-        } else {
-            resumeController.next();
-        }
+	void interact(ResumeController resumeController) {
+		if (this.yesNoDialog.read(MessageView.MESSAGE_RESUME.getMessage())) {
+			resumeController.reset();
+		} else {
+			resumeController.next();
+		}
 
-    }
+	}
 }
