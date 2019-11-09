@@ -31,7 +31,7 @@ public class Game {
 		return null;
 	}
 
-	public Error move(Coordinate origin, Coordinate target) {
+	Error move(Coordinate origin, Coordinate target) {
 		assert origin != null && target != null;
 		if (!origin.isValid() || !target.isValid()) {
 			return Error.OUT_COORDINATE;
@@ -68,7 +68,7 @@ public class Game {
 		return null;
 	}
 
-	public Color getColor(Coordinate coordinate) {
+	Color getColor(Coordinate coordinate) {
 		return this.board.getColor(coordinate);
 	}
 
@@ -77,19 +77,19 @@ public class Game {
 		return this.board + "\n" + this.turn;
 	}
 
-	public Color getColor() {
+	Color getColor() {
 		return this.turn.getColor();
 	}
 
-	public Piece getPiece(Coordinate coordinate) {
+	Piece getPiece(Coordinate coordinate) {
 		return this.board.getPiece(coordinate);
 	}
 
-	public boolean isBlocked() {
+	boolean isBlocked() {
 		return this.board.getPieces(this.turn.getColor()).isEmpty();
 	}
 
-	public int getDimension() {
+	int getDimension() {
 		return this.board.getDimension();
 	}
 

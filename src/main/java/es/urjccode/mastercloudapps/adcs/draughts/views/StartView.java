@@ -10,7 +10,7 @@ public class StartView extends SubView {
         super();
     }
 
-    public void interact(StartController startController) {
+    void interact(StartController startController) {
         this.console.writeln(StartView.TITTLE);
         new GameView().write(startController);
         startController.start();

@@ -8,16 +8,16 @@ public class State {
 		this.reset();
 	}
 
-	public void next() {
+	void next() {
         assert this.stateValue != StateValue.EXIT;
 		this.stateValue = StateValue.values()[this.stateValue.ordinal() + 1];
 	}
 
-	public void reset() {
+	void reset() {
 		this.stateValue = StateValue.INITIAL;
 	}
 
-	public StateValue getValueState() {
+	StateValue getValueState() {
 		return this.stateValue;
 	}
 }

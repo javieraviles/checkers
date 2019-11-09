@@ -12,7 +12,7 @@ class Turn {
         this.color = Color.values()[(this.color.ordinal()+1)%2];
     }
 
-    public Color getColor() {
+    Color getColor() {
 		return this.color;
     }
     

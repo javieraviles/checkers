@@ -14,7 +14,7 @@ public class ResumeView extends SubView {
         this.yesNoDialog = new YesNoDialog();
     }
 
-    public void interact(ResumeController resumeController) {
+    void interact(ResumeController resumeController) {
         if (this.yesNoDialog.read(ResumeView.MESSAGE)){
             resumeController.reset();
         } else {

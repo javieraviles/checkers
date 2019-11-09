@@ -21,11 +21,11 @@ class Square {
         return this.piece;
     }
 
-	public boolean isEmpty() {
+	boolean isEmpty() {
 		return this.piece == null;
 	}
 
-	public Color getColor() {
+	Color getColor() {
         if (piece == null){
             return null;
         }

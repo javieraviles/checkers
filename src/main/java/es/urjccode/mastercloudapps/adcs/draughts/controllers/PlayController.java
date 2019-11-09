@@ -20,7 +20,7 @@ public class PlayController extends Controller {
 		return error;
     }
 
-	public Piece getPiece(Coordinate coordinate) {
+	Piece getPiece(Coordinate coordinate) {
 		return session.getPiece(coordinate);
 	}
 
