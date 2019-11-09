@@ -53,7 +53,10 @@ class Board {
 		List<Piece> pieces = new ArrayList<Piece>();
 		for (int i = 0; i < this.getDimension(); i++) {
 			for (int j = 0; j < this.getDimension(); j++) {
-				pieces.add(this.getSquare(new Coordinate(i, j)).getPiece());
+				Piece piece = this.getPiece(new Coordinate(i, j));
+				if (piece != null && piece.getColor() == color) {
+					pieces.add(piece);
+				}
 			}
 		}
 		return pieces;
