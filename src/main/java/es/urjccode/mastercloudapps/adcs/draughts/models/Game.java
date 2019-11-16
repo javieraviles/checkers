@@ -1,11 +1,8 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-import java.util.List;
-
 public class Game {
 
 	private Board board;
-
 	private Turn turn;
 
 	public Game() {
@@ -23,53 +20,72 @@ public class Game {
 	}
 
 	private Piece getInitialPiece(Coordinate coordinate) {
+		assert coordinate != null;
 		if (coordinate.isBlack()) {
-			if (coordinate.getRow() <= 2) {
-				return new Piece(Color.BLACK);
-			} else if (coordinate.getRow() >= 5) {
-				return new Piece(Color.WHITE);
+			final int row = coordinate.getRow();
+			Color color = null;
+			if (row <= 2) {
+				color = Color.BLACK;
+			} else if (row >= 5) {
+				color = Color.WHITE;
+			}
+			if (color != null) {
+				return new Piece(color);
 			}
 		}
 		return null;
 	}
 
 	public void move(Coordinate origin, Coordinate target) {
-		assert origin != null && target != null;
+		assert this.isCorrect(origin, target) == null;
+		if (origin.diagonalDistance(target) == 2) {
+			this.board.remove(origin.betweenDiagonal(target));
+		}
 		this.board.move(origin, target);
+		if (this.board.getPiece(target).isLimit(target)){
+			this.board.remove(target);
+			this.board.put(target, new King(Color.WHITE));
+		}
 		this.turn.change();
 	}
 
-	public Error isValidMove(Coordinate origin, Coordinate target) {
-		return this.board.isValidMovement(origin, target, this.getColor());
+	public Error isCorrect(Coordinate origin, Coordinate target){
+		assert origin != null;
+		assert target != null;
+		if (board.isEmpty(origin)) {
+			return Error.EMPTY_ORIGIN;
+		}
+		if (this.turn.getColor() != this.board.getColor(origin)) {
+			return Error.OPPOSITE_PIECE;
+		}
+		return this.board.getPiece(origin).isCorrect(origin, target, board);
 	}
 
 	public Color getColor(Coordinate coordinate) {
+		assert coordinate != null;
 		return this.board.getColor(coordinate);
-	}
-
-	@Override
-	public String toString() {
-		return this.board + "\n" + this.turn;
 	}
 
 	public Color getColor() {
 		return this.turn.getColor();
 	}
 
-	public Piece getPiece(Coordinate coordinate) {
-		return this.board.getPiece(coordinate);
-	}
-
 	public boolean isBlocked() {
-		return this.getPieces(this.getColor()).isEmpty();
+		return this.board.getPieces(this.turn.getColor()).isEmpty();
 	}
 
 	public int getDimension() {
 		return this.board.getDimension();
 	}
 
-	public List<Piece> getPieces(Color color) {
-		return this.board.getPieces(color);
+	public Piece getPiece(Coordinate coordinate) {
+		assert coordinate != null;
+		return this.board.getPiece(coordinate);
+	}
+
+	@Override
+	public String toString() {
+		return this.board + "\n" + this.turn;
 	}
 
 }

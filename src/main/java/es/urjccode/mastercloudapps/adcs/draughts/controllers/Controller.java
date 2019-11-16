@@ -11,11 +11,14 @@ public abstract class Controller {
 	protected State state;
 
 	protected Controller(Game game, State state) {
+		assert game != null;
+		assert state != null;
 		this.game = game;
 		this.state = state;
 	}
 
 	public Color getColor(Coordinate coordinate) {
+		assert coordinate != null;
 		return this.game.getColor(coordinate);
 	}
 
@@ -23,6 +26,6 @@ public abstract class Controller {
 		return this.game.getDimension();
 	}
 
-	public abstract void accept(ControllersVisitor controllersVisitor);
+	abstract public void accept(ControllersVisitor controllersVisitor);
 
 }

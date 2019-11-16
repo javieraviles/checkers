@@ -2,15 +2,19 @@ package es.urjccode.mastercloudapps.adcs.draughts.views;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.StartController;
 
-public class StartView extends WithConsoleView {
+class StartView extends SubView {
 
-	public StartView() {
-		super();
-	}
+    private static final String TITTLE = "Draughts";
 
-	void interact(StartController startController) {
-		this.console.writeln(MessageView.TITLE.getMessage());
-		new GameView().write(startController);
-		startController.start();
-	}
+    StartView(){
+        super();
+    }
+
+    void interact(StartController startController) {
+        assert startController != null;
+        this.console.writeln(StartView.TITTLE);
+        new GameView().write(startController);
+        startController.start();
+    }
+
 }

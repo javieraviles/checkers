@@ -12,27 +12,38 @@ public class Coordinate {
         this.column = column;
     }
 
-    boolean isValid() {
-        return Coordinate.LOWER_LIMIT <= row && row <= Coordinate.UPPER_LIMIT && Coordinate.LOWER_LIMIT <= column
-                && column <= Coordinate.UPPER_LIMIT;
+    public static Coordinate getInstance(String format){
+        assert format != null;
+        try {
+            int value = Integer.parseInt(format);
+            int row = value / 10 - 1;
+            int column = value % 10 - 1;
+            if (row < Coordinate.LOWER_LIMIT || Coordinate.UPPER_LIMIT < row 
+                || column < Coordinate.LOWER_LIMIT || Coordinate.UPPER_LIMIT < column){
+                return null;
+            }
+            return new Coordinate(row, column);
+            
+        } catch(Exception ex){
+            return null;
+        } 
     }
 
     boolean isDiagonal(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid();
+        assert coordinate != null;
         return this.row + this.column == coordinate.row + coordinate.column
                 || this.row - this.column == coordinate.row - coordinate.column;
     }
 
     int diagonalDistance(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid() && this.isDiagonal(coordinate);
+        assert coordinate != null;
+        assert this.isDiagonal(coordinate);
         return Math.abs(this.row - coordinate.row);
     }
 
     Coordinate betweenDiagonal(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid() && this.diagonalDistance(coordinate) == 2;
+        assert coordinate != null;
+        assert this.diagonalDistance(coordinate) == 2;
         int rowShift = 1;
         if (coordinate.row - this.row < 0) {
             rowShift = -1;
@@ -45,7 +56,6 @@ public class Coordinate {
     }
 
     boolean isBlack() {
-        assert this.isValid();
         return (this.row + this.column) % 2 != 0;
     }
 

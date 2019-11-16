@@ -8,28 +8,29 @@ class Square {
     }
 
     void put(Piece piece) {
+        assert piece != null;
         this.piece = piece;
     }
 
     Piece remove() {
-        Piece tmpPiece = this.piece;
+        Piece removedPiece = this.getPiece();
         this.piece = null;
-        return tmpPiece;
-    }
-
-    Piece getPiece() {
-        return this.piece;
+        return removedPiece;
     }
 
 	boolean isEmpty() {
-		return this.piece == null;
+		return this.getPiece() == null;
 	}
 
 	Color getColor() {
-        if (piece == null){
+        if (this.getPiece() == null){
             return null;
         }
-		return this.piece.getColor();
-	}
+		return this.getPiece().getColor();
+    }
+    
+    Piece getPiece() {
+        return this.piece;
+    }
 
 }

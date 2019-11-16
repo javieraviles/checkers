@@ -42,7 +42,9 @@ public class GameViewTest {
     
     @Test
     public void testInteract(){
-        StartController startController = new StartController(new Game(), new State());
+        Game game = new Game();
+        State state = new State();
+        StartController startController = new StartController(game, state);
         this.gameView.write(startController);
         verify(console, times(90)).write(argument.capture());
         List<String> rows = Arrays.asList(
