@@ -14,9 +14,6 @@ import org.mockito.MockitoAnnotations;
 public class GameWithKingTest {
 
     @Mock
-    Turn turn;
-
-    @Mock
     Piece piece;
     
     @Mock
@@ -34,14 +31,11 @@ public class GameWithKingTest {
     public void testGivenGameWhenWhitePawnAtLimitThenNewKing(){
         Coordinate origin = new Coordinate(1,0);
         Coordinate target = new Coordinate(0,1);
-        
-        when (turn.getColor()).thenReturn(Color.WHITE);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
         when(board.getPiece(origin)).thenReturn(piece);
         when(piece.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Piece(Color.WHITE));
-        
         when(board.getPiece(target)).thenReturn(new Piece(Color.WHITE));
         game.move(origin, target);
         verify(board).remove(target);
@@ -52,7 +46,6 @@ public class GameWithKingTest {
     public void testGivenGameWhenPawnAtLimitAndEatingThenNewKing(){
         Coordinate origin = new Coordinate(2,1);
         Coordinate target = new Coordinate(0,3);
-        when (turn.getColor()).thenReturn(Color.WHITE);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
         when(board.getPiece(origin)).thenReturn(piece);
@@ -69,7 +62,7 @@ public class GameWithKingTest {
     public void testGivenGameWhenBlackPawnAtLimitThenNewKing(){
         Coordinate origin = new Coordinate(6,3);
         Coordinate target = new Coordinate(7,2);
-        when (turn.getColor()).thenReturn(Color.BLACK);
+        game.turn.change();
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.BLACK);
         when(board.getPiece(origin)).thenReturn(piece);

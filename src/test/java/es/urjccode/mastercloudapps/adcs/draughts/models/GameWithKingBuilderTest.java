@@ -10,8 +10,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class GameWithKingBuilderTest {
-	@Mock
-    Turn turn;
 
     @Mock
     Piece piece;
@@ -79,6 +77,7 @@ public class GameWithKingBuilderTest {
                 .row("   n    ")
                 .row("        ")
                 .build();
+        game.turn.change();
         game.move(origin, target);
         assertNull(game.getPiece(origin));
         assertEquals(Color.BLACK, game.getPiece(target).getColor());
@@ -98,6 +97,7 @@ public class GameWithKingBuilderTest {
                 .row("  b     ")
                 .row("        ")
                 .build();
+        game.turn.change();
         game.move(origin, target);
         assertNull(game.getPiece(origin));
         assertEquals(Color.BLACK, game.getPiece(target).getColor());

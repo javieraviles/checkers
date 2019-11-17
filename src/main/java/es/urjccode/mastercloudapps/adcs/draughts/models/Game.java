@@ -3,9 +3,9 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 public class Game {
 
 	private Board board;
-	private Turn turn;
-	
-	public Game(Board board){
+	Turn turn;
+
+	public Game(Board board) {
 		this.turn = new Turn();
 		this.board = board;
 	}
@@ -46,15 +46,16 @@ public class Game {
 		if (origin.diagonalDistance(target) == 2) {
 			this.board.remove(origin.betweenDiagonal(target));
 		}
+		Color pieceColor = this.getColor(origin);
 		this.board.move(origin, target);
-		if (this.board.getPiece(target).isLimit(target)){
+		if (this.board.getPiece(target).isLimit(target)) {
 			this.board.remove(target);
-			this.board.put(target, new King(Color.WHITE));
+			this.board.put(target, new King(pieceColor == Color.WHITE ? Color.WHITE : Color.BLACK));
 		}
 		this.turn.change();
 	}
 
-	public Error isCorrect(Coordinate origin, Coordinate target){
+	public Error isCorrect(Coordinate origin, Coordinate target) {
 		assert origin != null;
 		assert target != null;
 		if (board.isEmpty(origin)) {
