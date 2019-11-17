@@ -28,7 +28,9 @@ class GameBuilder {
 		for (int i = 0; i < this.strings.size(); i++) {
 			for (int j = 0; j < this.strings.get(i).length(); j++) {
 				char character = this.strings.get(i).charAt(j);
-				board.put(new Coordinate(i, j), pieces.get(character));
+				if(pieces.containsKey(character)) {
+					board.put(new Coordinate(i, j), pieces.get(character));
+				}
 			}
 		}
 		return new Game(board);
