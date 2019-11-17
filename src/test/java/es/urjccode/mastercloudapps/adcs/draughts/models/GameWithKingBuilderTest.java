@@ -118,7 +118,6 @@ public class GameWithKingBuilderTest {
                 .row("B       ")
                 .row("        ")
                 .build();
-        game.turn.change();
         game.move(origin, target);
         assertNull(game.getPiece(origin));
         assertEquals(Color.WHITE, game.getPiece(target).getColor());
@@ -139,7 +138,6 @@ public class GameWithKingBuilderTest {
                 .row("B       ")
                 .row("        ")
                 .build();
-        game.turn.change();
         game.move(origin, target);
         assertNull(game.getPiece(origin));
         assertNull(game.getPiece(eaten));
@@ -160,7 +158,6 @@ public class GameWithKingBuilderTest {
                 .row("B       ")
                 .row("        ")
                 .build();
-        game.turn.change();
         game.move(origin, target);
     }
 }

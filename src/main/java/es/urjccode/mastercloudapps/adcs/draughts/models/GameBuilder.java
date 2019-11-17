@@ -5,20 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class GameBuilder {
+public class GameBuilder {
 
 	private List<String> strings;
 
-	GameBuilder() {
+	public GameBuilder() {
 		this.strings = new ArrayList<String>();
 	}
 
-	GameBuilder row(String string) {
+	public GameBuilder row(String string) {
 		this.strings.add(string);
 		return this;
 	}
 
-	Game build() {
+	public Game build() {
 		final Map<Character, Piece> pieces = new HashMap<>();
 		pieces.put('b', new Men(Color.WHITE));
 		pieces.put('B', new King(Color.WHITE));
