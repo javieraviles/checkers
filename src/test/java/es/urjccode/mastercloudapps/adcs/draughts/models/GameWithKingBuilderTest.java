@@ -102,4 +102,65 @@ public class GameWithKingBuilderTest {
         assertNull(game.getPiece(origin));
         assertEquals(Color.BLACK, game.getPiece(target).getColor());
     }
+    
+ 
+    @Test
+    public void testGivenGameWhenKingMovingFurtherThenOkay(){
+        Coordinate origin = new Coordinate(6,0);
+        Coordinate target = new Coordinate(0,6);
+        Game game = new GameBuilder()
+                .row("        ")
+                .row("        ")
+                .row("        ")
+                .row("        ")
+                .row("        ")
+                .row("        ")
+                .row("B       ")
+                .row("        ")
+                .build();
+        game.turn.change();
+        game.move(origin, target);
+        assertNull(game.getPiece(origin));
+        assertEquals(Color.WHITE, game.getPiece(target).getColor());
+    }
+    
+    @Test
+    public void testGivenGameWhenKingMovingFurtherAndEatingOnePieceThenOkay(){
+        Coordinate origin = new Coordinate(6,0);
+        Coordinate target = new Coordinate(0,6);
+        Coordinate eaten = new Coordinate(3,3);
+        Game game = new GameBuilder()
+                .row("        ")
+                .row("        ")
+                .row("        ")
+                .row("   n    ")
+                .row("        ")
+                .row("        ")
+                .row("B       ")
+                .row("        ")
+                .build();
+        game.turn.change();
+        game.move(origin, target);
+        assertNull(game.getPiece(origin));
+        assertNull(game.getPiece(eaten));
+        assertEquals(Color.WHITE, game.getPiece(target).getColor());
+    }
+    
+    @Test(expected = AssertionError.class)
+    public void testGivenGameWhenKingMovingFurtherAndEatingMoreThanOnePieceThenError(){
+        Coordinate origin = new Coordinate(6,0);
+        Coordinate target = new Coordinate(0,6);
+        Game game = new GameBuilder()
+                .row("        ")
+                .row("        ")
+                .row("        ")
+                .row("   n    ")
+                .row("  n     ")
+                .row("        ")
+                .row("B       ")
+                .row("        ")
+                .build();
+        game.turn.change();
+        game.move(origin, target);
+    }
 }
