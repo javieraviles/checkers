@@ -48,9 +48,16 @@ public class Game {
 		assert this.isCorrect(origin, target) == null : "Incorrect move "+this.isCorrect(origin, target);
 		if (origin.diagonalDistance(target) >= 2) {
 			List<Coordinate> diagonalList = origin.betweenDiagonalList(target);
+			boolean alreadyRemovedPiece = false;
 			for (Iterator<Coordinate> iterator = diagonalList.iterator(); iterator.hasNext();) {
 				Coordinate coordinate = (Coordinate) iterator.next();
-				if(this.getPiece(coordinate)!=null) this.board.remove(coordinate);
+				if(this.getPiece(coordinate)!=null) {
+					if(alreadyRemovedPiece) {
+						throw new AssertionError();
+					}
+					alreadyRemovedPiece = true;
+					this.board.remove(coordinate);
+				}
 			}
 		}
 		Color pieceColor = this.getColor(origin);
